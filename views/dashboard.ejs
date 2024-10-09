@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dashboard.css"> <!-- إضافة ملف التنسيق -->
+    <title>لوحة التحكم</title>
+</head>
+<body>
+    <header class="dashboard-header">
+        <nav>
+            <ul>
+                <li><a href="/">الصفحة الرئيسية</a></li>
+                <li><a href="/dashboard">لوحة التحكم</a></li>
+                <li class="profile-info">
+                    <div class="avatar-container" onclick="toggleProfileBox()">
+                        <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" alt="Profile Avatar" class="avatar">
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- صندوق المستخدم -->
+        <div id="profile-box" class="profile-box">
+            <span class="username"><%= user.username %></span>
+            <a href="/logout" class="btn-secondary">تسجيل الخروج</a>
+        </div>
+    </header>
+    <main>
+        <div class="user-stats">
+            <div class="stat-box">
+                <p class="stat-name">LVL</p>
+                <p class="stat-value"><%= userStats.level %></p>
+            </div>
+            <div class="stat-box">
+                <p class="stat-name">XP</p>
+                <p class="stat-value"><%= userStats.xp %></p>
+            </div>
+            <div class="stat-box">
+                <p class="stat-name">RANK</p>
+                <p class="stat-value"><%= userStats.rank %></p>
+            </div>
+            <div class="stat-box">
+                <p class="stat-name">ABX</p>
+                <p class="stat-value"><%= userStats.currency %></p>
+            </div>
+        </div>
+              
+        <h1>السيرفرات التي تديرها</h1>
+        <ul id="guild-list">
+            <!-- سيتم جلب السيرفرات باستخدام JavaScript -->
+        </ul>
+    </main>
+
+    <script>
+        function toggleProfileBox() {
+            const profileBox = document.getElementById('profile-box');
+            if (profileBox.style.display === 'block') {
+                profileBox.style.display = 'none';
+            } else {
+                profileBox.style.display = 'block';
+            }
+        }
+
+        // إغلاق الصندوق عند النقر خارج الأفتار
+        document.addEventListener('click', function(event) {
+            const profileBox = document.getElementById('profile-box');
+            const avatarContainer = document.querySelector('.avatar-container');
+
+            if (!avatarContainer.contains(event.target) && !profileBox.contains(event.target)) {
+                profileBox.style.display = 'none';
+            }
+        });
+        // جلب بيانات السيرفرات من API 
+        fetch('/api/guilds')
+        .then(response => response.json())
+        .then(guilds => {
+            const guildList = document.getElementById('guild-list');
+            guilds.forEach(guild => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('guild-item');
+    
+                // تحقق مما إذا كان للسيرفر أيقونة (icon)
+                const iconUrl = guild.icon 
+                    ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`
+                    : `https://ui-avatars.com/api/?name=${encodeURIComponent(guild.name)}&background=random&color=fff&size=128`;
+    
+                listItem.innerHTML = `
+                    <a href="/server/${guild.id}/settings" class="guild-icon-link">  <!-- تعديل هنا -->
+                        <img src="${iconUrl}" alt="Server Icon" class="server-icon">
+                        <span class="guild-name">${guild.name}</span>
+                    </a>
+                `;
+
+                guildList.appendChild(listItem);
+            });
+        })
+        .catch(error => console.error('Error fetching guilds:', error));
+</script>
+    
+</body>
+</html>

@@ -1,0 +1,224 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #f7c600;
+    text-decoration: none;
+}
+
+h1 {
+    color: #f7c600;
+    text-align: center; /* جعل العنوان في المنتصف */
+}
+/* تحسين تصميم الأزرار في الهيدر */
+header {
+    background-color: #333;
+    padding: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* جعل الأزرار على الجانبين */
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    align-items: center;
+
+    padding: 0;
+    display: flex;
+    margin: 0;
+    width: 100%; /* اجعل الـ ul يأخذ عرض الصفحة بالكامل */
+}
+
+nav ul li {
+    margin-right: 15px; /* مسافة بين الأزرار */
+}
+
+nav ul li a {
+    color: #f7c600;
+    padding: 10px 20px;
+    background-color: #444;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* تأثير التمرير */
+}
+
+nav ul li a:hover {
+    background-color: #f7c600; /* تغيير اللون عند التمرير */
+    color: #222; /* لون النص عند التمرير */
+    transform: scale(1.05); /* تكبير الزر قليلاً */
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* دفع عنصر الـ profile-info إلى اليمين */
+}
+
+.avatar-container {
+    position: relative;
+    display: flex; /* جعل الأفاتار واسم المستخدم في صف واحد */
+    align-items: center; /* محاذاة العمودين في المنتصف */
+}
+
+.avatar-container:hover .username {
+    display: block; /* إظهار اسم المستخدم عند التمرير */
+}
+
+.avatar-container .username {
+    display: none; /* إخفاء اسم المستخدم بشكل افتراضي */
+    position: absolute;
+    top: 100%; /* وضع الاسم تحت الصورة */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #444;
+    color: #f7c600;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap; /* منع انكسار النص */
+}
+
+.avatar-container img.avatar {
+    width: 60px; /* زيادة حجم الصورة */
+    height: 60px;
+    border-radius: 50%;
+    margin-left: 15px; /* المسافة بين الصورة واسم المستخدم */
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px; /* الحد الأقصى لعرض المحتوى */
+    margin: 0 auto; /* جعل المحتوى في المنتصف */
+    text-align: center; /* جعل النص في المنتصف */
+}
+
+.btn-primary, .btn-secondary {
+    background-color: #f7c600;
+    color: #222;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* إضافة تأثير على الأزرار */
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    background-color: #e0ac00; /* لون عند مرور الفأرة */
+    transform: scale(1.05); /* تكبير الأزرار قليلاً عند التمرير */
+}
+
+.guild-item {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* محاذاة العناصر إلى اليسار */
+    margin-bottom: 20px;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 10px; /* إضافة حواف دائرية */
+    transition: background-color 0.3s ease; /* تأثير التمرير */
+}
+
+.guild-item:hover {
+    background-color: #444; /* تغيير اللون عند التمرير */
+}
+
+.guild-item img.server-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.guild-link {
+    color: #f7c600; /* لون اسم السيرفر */
+    font-size: 1.2em; /* حجم أكبر لاسم السيرفر */
+}
+
+footer {
+    background-color: #333;
+    padding: 20px;
+    text-align: center;
+    color: #f7c600;
+    margin-top: 40px;
+}
+
+.server-info {
+    background-color: #333;
+    border-radius: 8px; /* إضافة حواف دائرية */
+    padding: 15px; /* إضافة مسافة داخلية */
+    margin-bottom: 20px; /* مسافة بين الحقول */
+    color: #f7c600; /* لون النص */
+}
+
+form {
+    background-color: #444; /* خلفية النموذج */
+    padding: 20px; /* إضافة مسافة داخلية */
+    border-radius: 8px; /* إضافة حواف دائرية */
+    margin-bottom: 20px; /* مسافة بين النموذج والعناصر الأخرى */
+}
+
+label {
+    display: block; /* عرض التسمية في سطر جديد */
+    margin-top: 10px; /* مسافة بين التسمية والحقول */
+    color: #f7c600; /* لون التسمية */
+    margin-bottom: 15px;
+}
+
+select {
+    width: 100%; /* عرض كامل */
+    padding: 8px; /* إضافة مسافة داخلية */
+    border-radius: 5px; /* إضافة حواف دائرية */
+    background-color: #555; /* لون الخلفية */
+    color: #fff; /* لون النص */
+    border: 1px solid #444; /* حد حول الحقل */
+}
+
+button {
+    background-color: #f7c600; /* لون الزر */
+    color: #222; /* لون النص */
+    padding: 10px 20px; /* مسافة داخلية */
+    border: none; /* إزالة الحد */
+    border-radius: 5px; /* إضافة حواف دائرية */
+    cursor: pointer; /* تغيير المؤشر عند التمرير */
+    margin-top: 15px; /* مسافة فوق الزر */
+}
+
+button:hover {
+    background-color: #e6b600; /* لون الزر عند التمرير */
+}
+
+.log-settings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* المسافة بين الصناديق */
+    justify-content: center; /* محاذاة الصناديق إلى الوسط */
+}
+
+.log-box {
+    border: 1px solid rgb(230, 182, 0); /* لون الحدود */
+    padding: 20px; /* مساحة داخلية أكبر */
+    border-radius: 10px; /* زوايا دائرية أكبر */
+    flex: 1 1 200px; /* العرض */
+    min-width: 200px; /* الحد الأدنى للعرض */
+    background-color: #222; /* لون خلفية الصندوق */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل للصندوق */
+    transition: transform 0.3s, box-shadow 0.3s; /* تأثير عند التحويم */
+}
+.guild-info {
+    font-size: 12px; /* حجم الخط الصغير */
+    color: #666; /* لون النص */
+    display: block; /* جعلها تظهر في سطر جديد */
+}
+
+
+.log-box:hover {
+    transform: translateY(-5px); /* رفع الصندوق عند التحويم */
+    box-shadow: 0 8px 16px rgb(230, 182, 0); /* ظل أكبر عند التحويم */
+}

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/responses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>إعدادات الردود</title>
+</head>
+<body>
+    <header class="dashboard-header">
+        <nav>
+            <ul>
+                <li><a href="/">الصفحة الرئيسية</a></li>
+                <li><a href="/dashboard">لوحة التحكم</a></li>
+                <li class="profile-info">
+                    <div class="avatar-container" onclick="toggleProfileBox()">
+                        <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" alt="Profile Avatar" class="avatar">
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div id="profile-box" class="profile-box">
+            <span class="username"><%= user.username %></span>
+            <a href="/logout" class="btn-secondary">تسجيل الخروج</a>
+        </div>
+    </header>
+    <main>
+        <div class="content">
+            <h1>إعدادات الردود</h1>
+
+            <!-- زر إضافة رد جديد -->
+            <button id="add-response-btn" class="btn-primary" onclick="toggleAddResponse()">
+                <i class="fas fa-plus"></i> إضافة رد جديد
+            </button>
+
+            <!-- حقل إضافة رد جديد -->
+            <div id="add-response-form" style="display: none;" class="add-response-container">
+                <div class="response-box">
+                    <form action="/server/<%= guild.id %>/responses" method="POST">
+                        <div class="form-group">
+                            <label for="trigger" class="form-label">الكلمة التي سيستجيب لها البوت</label>
+                            <input type="text" id="trigger" name="trigger" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="response" class="form-label">الرد الذي سيقدمه البوت</label>
+                            <input type="text" id="response" name="response" required>
+                        </div> 
+                        
+                        <!-- تعليمات خاصة باستخدام [user] و [userName] -->
+                        <div class="instruction-box">
+                            <p>للإشارة إلى العضو <b>[user]</b></p>
+                            <p>لعرض الاسم بدون الإشارة <b>[userName]</b></p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">هل يحتاج البوت إلى رد على الرسالة؟</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="sendReply" value="true" required> رد
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="sendReply" value="false" required> إرسال
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">إضافة رد</button>
+                    </form>
+                </div>
+            </div>
+
+            <hr>
+            <!-- عرض الردود الحالية -->
+            <div class="responses-list">
+                <% responses.forEach(response => { %>
+                    <div class="response-item" id="response-item-<%= response._id %>">
+                        <div class="response-summary" onclick="toggleDetails('<%= response._id %>')">
+                            <p><strong></strong> <%= response.word %></p>
+                            <button class="btn-toggle-details">إظهار التفصيل</button>
+                        </div>
+                        <div id="details-<%= response._id %>" class="response-details" style="display: none;">
+                            <form id="form-<%= response._id %>" action="/server/<%= guild.id %>/responses/<%= response._id %>" method="POST" onsubmit="return handleResponseEdit(event, '<%= response._id %>');">
+                                <div class="form-group">
+                                    <label for="word-<%= response._id %>">الكلمة</label>
+                                    <input type="text" id="word-<%= response._id %>" name="word" value="<%= response.word %>" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="response-<%= response._id %>">الرد</label>
+                                    <input type="text" id="response-<%= response._id %>" name="response" value="<%= response.response %>" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>رد على الرسالة</label>
+                                    <div class="radio-group">
+                                        <label class="radio-option">
+                                            <input type="radio" id="yes-<%= response._id %>" name="sendReply" value="true" <%= response.sendReply ? 'checked' : '' %> disabled> نعم
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" id="no-<%= response._id %>" name="sendReply" value="false" <%= !response.sendReply ? 'checked' : '' %> disabled> لا
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-secondary" onclick="editResponse('<%= response._id %>')">تعديل</button>
+                                <button type="submit" class="btn-primary" style="display:none;" id="save-btn-<%= response._id %>">حفظ</button>
+                                <button type="button" class="btn-danger" onclick="deleteResponse('<%= response._id %>')">حذف</button>
+                            </form>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+
+        <div id="notification" style="display:none;"></div>
+        <a href="/dashboard">العودة إلى لوحة التحكم</a>
+
+    </main>
+
+    <script>
+        function toggleProfileBox() {
+            const profileBox = document.getElementById('profile-box');
+            profileBox.style.display = profileBox.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleAddResponse() {
+            const addResponseForm = document.getElementById("add-response-form");
+            const responseBox = addResponseForm.querySelector(".response-box");
+
+            if (addResponseForm.style.display === "none" || addResponseForm.style.display === "") {
+                addResponseForm.style.display = "block";
+                setTimeout(() => {
+                    responseBox.classList.add("visible");
+                }, 10);
+            } else {
+                responseBox.classList.remove("visible");
+                setTimeout(() => {
+                    addResponseForm.style.display = "none";
+                }, 300);
+            }
+        }
+
+        function toggleDetails(responseId) {
+            const details = document.getElementById(`details-${responseId}`);
+            details.classList.toggle('visible');
+
+            if (details.style.display === 'none' || details.style.display === '') {
+                details.style.display = 'block';
+                setTimeout(() => {
+                    details.classList.add('visible');
+                }, 10);
+            } else {
+                details.classList.remove('visible');
+                details.addEventListener('transitionend', () => {
+                    if (!details.classList.contains('visible')) {
+                        details.style.display = 'none';
+                    }
+                }, { once: true });
+            }
+        }
+
+        // دالة لإظهار الإشعار
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message; // تعيين نص الإشعار
+            notification.style.display = 'block'; // عرض الإشعار
+            setTimeout(() => {
+                notification.style.display = 'none'; // إخفاء الإشعار بعد 3.5 ثانية
+            }, 3500);
+        }
+
+        function editResponse(responseId) {
+            const editBtn = document.querySelector(`#form-${responseId} .btn-secondary`);
+            const isEditing = editBtn.textContent === 'تعديل';
+            const wordInput = document.getElementById(`word-${responseId}`);
+            const responseInput = document.getElementById(`response-${responseId}`);
+            const yesRadio = document.getElementById(`yes-${responseId}`);
+            const noRadio = document.getElementById(`no-${responseId}`);
+
+            if (isEditing) {
+                // إذا كان في وضع التعديل
+                wordInput.removeAttribute('readonly');
+                responseInput.removeAttribute('readonly');
+                yesRadio.removeAttribute('disabled');
+                noRadio.removeAttribute('disabled');
+                document.getElementById(`save-btn-${responseId}`).style.display = 'inline-block';
+                editBtn.textContent = 'إلغاء';
+            } else {
+                // إذا كان في وضع الإلغاء
+                wordInput.setAttribute('readonly', true);
+                responseInput.setAttribute('readonly', true);
+                yesRadio.setAttribute('disabled', true);
+                noRadio.setAttribute('disabled', true);
+                document.getElementById(`save-btn-${responseId}`).style.display = 'none';
+                editBtn.textContent = 'تعديل';
+            }
+        }
+
+        function deleteResponse(responseId) {
+            if (confirm("هل أنت متأكد من حذف هذا الرد؟")) {
+                fetch(`/server/<%= guild.id %>/responses/${responseId}`, {
+                    method: 'DELETE',
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // إزالة العنصر من DOM
+                        const responseItem = document.getElementById(`response-item-${responseId}`);
+                        responseItem.remove(); 
+                        showNotification("تم حذف الرد بنجاح.");
+                    } else {
+                        showNotification("حدث خطأ أثناء حذف الرد.");
+                    }
+                })
+                .catch(error => {
+                    console.error("خطأ في الاتصال:", error);
+                    showNotification("حدث خطأ في الاتصال.");
+                });
+            }
+        }
+
+        function handleResponseEdit(event, responseId) {
+            event.preventDefault(); // منع الإرسال الافتراضي للنموذج
+
+            fetch(event.target.action, {
+                method: 'POST',
+                body: new URLSearchParams(new FormData(event.target)),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); // تحويل الرد إلى JSON
+                } else {
+                    throw new Error('حدث خطأ أثناء تعديل الرد.');
+                }
+            })
+            .then(data => {
+                showNotification(data.message); // إظهار الإشعار
+                toggleDetails(responseId); // إخفاء التفاصيل بعد التعديل
+            })
+            .catch(error => {
+                showNotification(error.message); // إظهار خطأ إذا حدث
+            });
+        }
+    </script>
+</body>
+</html>

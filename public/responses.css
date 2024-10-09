@@ -1,0 +1,469 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+
+body {
+    font-family: 'Poppins', sans-serif; /* استخدام خط Poppins */
+    background-color: #222;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #f7c600;
+    text-decoration: none;
+}
+
+h1 {
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    color: #f7c600;
+    text-align: center;
+    font-size: 2.5em; /* زيادة حجم الخط */
+    font-weight: 600; /* زيادة الوزن */
+}
+
+p, .response-item p {
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 1em; /* حجم خط عادي */
+    font-weight: 400; /* وزن عادي */
+    line-height: 1.5; /* ارتفاع السطر لتحسين القراءة */
+}
+
+hr {
+    border: none; /* إزالة الحدود الافتراضية */
+    height: 2px; /* سمك الخط */
+    background: linear-gradient(to right, #f7c600, #ff5733); /* تدرج لوني */
+    margin: 30px 0; /* مسافة من الأعلى والأسفل */
+    border-radius: 5px; /* زوايا مستديرة */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* ظل خفيف */
+}
+
+/* لإضافة تأثير تفاعلي */
+hr:hover {
+    height: 3px; /* زيادة سمك الخط عند التحويم */
+    transition: height 0.3s ease; /* تأثير سلس عند التغيير */
+}
+
+
+/* تحسين تصميم الأزرار في الهيدر */
+header {
+    background-color: #333;
+    padding: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* جعل الأزرار على الجانبين */
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    align-items: center;
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 15px;
+    padding: 0;
+    display: flex;
+    margin: 0;
+    width: 100%; /* اجعل الـ ul يأخذ عرض الصفحة بالكامل */
+}
+
+nav ul li {
+    margin-right: 15px; /* مسافة بين الأزرار */
+}
+
+nav ul li a {
+    color: #f7c600;
+    padding: 10px 20px;
+    background-color: #444;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* تأثير التمرير */
+}
+
+nav ul li a:hover {
+    background-color: #f7c600; /* تغيير اللون عند التمرير */
+    color: #222; /* لون النص عند التمرير */
+    transform: scale(1.05); /* تكبير الزر قليلاً */
+}
+.profile-info {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* دفع عنصر الـ profile-info إلى اليمين */
+}
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer; /* لجعل صورة الأفتار قابلة للنقر */
+}
+
+.profile-box {
+    display: none; /* إخفاء الصندوق بشكل افتراضي */
+    position: absolute;
+    top: 70px; /* جعل الصندوق يظهر أسفل الأفتار */
+    right: 0;
+    background-color: #444;
+    color: #f7c600;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* لجعل الصندوق يظهر فوق العناصر الأخرى */
+    text-align: center; /* محاذاة المحتوى في المنتصف */
+}
+
+.profile-box .username {
+    display: block; /* جعل الاسم يظهر كعنصر كتلة */
+    font-size: 18px;
+    margin-bottom: 10px; /* إضافة مسافة أسفل الاسم */
+}
+
+.profile-box a {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #f7c600;
+    color: #444;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* إضافة تأثير على الأزرار */
+}
+
+.profile-box a:hover {
+    background-color: #e0ac00; /* لون عند مرور الفأرة */
+    transform: scale(1.05); /* تكبير الأزرار قليلاً عند التمرير */
+}
+
+
+
+.avatar-container img.avatar {
+    width: 60px; /* زيادة حجم الصورة */
+    height: 60px;
+    border-radius: 50%;
+    margin-left: 15px; /* المسافة بين الصورة واسم المستخدم */
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px; /* الحد الأقصى لعرض المحتوى */
+    margin: 0 auto; /* جعل المحتوى في المنتصف */
+    text-align: center; /* جعل النص في المنتصف */
+}
+
+.guild-info {
+    font-size: 12px; /* حجم الخط الصغير */
+    color: #666; /* لون النص */
+    display: block; /* جعلها تظهر في سطر جديد */
+}
+
+
+/* تصميم الإشعار */
+#notification {
+    display: none; /* إخفاء الإشعار افتراضيًا */
+    position: fixed;
+    top: 20px;
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 13px;
+    right: 20px;
+    background-color: #4caf50; /* لون الإشعار */
+    color: white; /* لون النص */
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeIn 0.5s, fadeOut 0.5s 3s; /* تأثيرات الظهور والاختفاء */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/* تصميم الـ response-box */
+.response-box {
+    background-color: #444; /* لون خلفية البوكس */
+    padding: 20px; /* مساحة داخلية للبكس */
+    border-radius: 10px; /* زوايا مستديرة للبكس */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* ظل خفيف */
+    margin-bottom: 20px; /* مسافة بين البوكس وزر إضافة رد */
+    opacity: 0; /* إخفاء العنصر بشكل افتراضي */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* إضافة تأثير التحريك */
+    transform: translateY(-10px); /* تحريك العنصر لأعلى قليلاً */
+}
+
+/* إضافة صنف لتفعيل الأنيميشن */
+.response-box.visible {
+    opacity: 1; /* جعل العنصر مرئي */
+    transform: translateY(0); /* إعادة العنصر إلى موضعه الطبيعي */
+}
+
+/* تنسيق الحقول */
+.form-group {
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 16px;
+    color: #f7c600;
+    margin-bottom: 25px; /* مسافة إضافية بين المجموعات */
+}
+
+/* تنسيق حقول الإدخال */
+input[type="text"], input[type="radio"] {
+    width: calc(100% - 20px); /* عرض كامل مع اعتبار المساحة الداخلية */
+    padding: 10px; /* مساحة داخلية */
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    border: 1px solid #555; /* حدود */
+    border-radius: 8px; /* حواف دائرية */
+    background-color: #222; /* لون الخلفية */
+    color: #f7c600; /* لون النص */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* تأثيرات التحريك */
+    margin-top: 5px; /* مسافة بين label و input */
+}
+
+/* تنسيق حقول الإدخال عندما تكون مركزة */
+input[type="text"]:focus {
+    border-color: #f7c600; /* تغيير لون الحد */
+    box-shadow: 0 0 10px rgba(247, 198, 0, 0.5); /* إضافة ظل خفيف */
+    outline: none; /* إزالة التأثير الافتراضي */
+}
+
+/* تنسيق label */
+.form-label {
+    display: block; /* جعل label ككتلة */
+    margin-bottom: 5px; /* مسافة بين label و input */
+    color: #f7c600; /* لون النص */
+}
+
+/* تصميم زر إضافة رد جديد */
+button.btn-primary {
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    background-color: #f7c600; /* لون الزر */
+    color: #222; /* لون النص */
+    padding: 10px 20px; /* مساحة داخلية */
+    border: none;
+    border-radius: 8px; /* حواف دائرية */
+    font-size: 13px; /* حجم الخط */
+    cursor: pointer; /* مؤشر اليد عند التمرير */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* تأثيرات الأنيميشن */
+    margin-bottom: 15px; /* إضافة مسافة أسفل الزر */
+}
+
+/* تأثيرات عند التمرير على الزر */
+button.btn-primary:hover {
+    background-color: #e0ac00; /* تغيير لون الزر عند التمرير */
+    transform: scale(1.05); /* تكبير الزر قليلاً */
+}
+
+/* تأثير عند النقر */
+button.btn-primary:active {
+    transform: scale(0.98); /* تصغير الزر عند الضغط */
+    background-color: #d8a500; /* لون مختلف عند النقر */
+}
+
+/* تصميم مجموعة أزرار الاختيار */
+.radio-group {
+    display: flex; /* استخدام Flexbox لترتيب الأزرار أفقيًا */
+    gap: 20px; /* مسافة بين الأزرار */
+    margin-top: 10px; /* مسافة أعلى المجموعة */
+}
+
+/* تنسيق خيارات الراديو */
+.radio-option {
+    display: flex; /* استخدام Flexbox لترتيب الراديو مع النص */
+    align-items: center; /* محاذاة النص مع زر الراديو */
+    cursor: pointer; /* تغيير المؤشر عند التمرير فوقها */
+}
+
+/* تنسيق أزرار الراديو */
+.radio-option input[type="radio"] {
+    appearance: none; /* إزالة الشكل الافتراضي */
+    width: 18px; /* عرض زر الراديو */
+    height: 18px; /* ارتفاع زر الراديو */
+    border-radius: 50%; /* جعل الزر دائري */
+    border: 2px solid #f7c600; /* لون الحد */
+    background-color: #222; /* لون الخلفية */
+    margin-right: 8px; /* تباعد بين الزر والنص */
+    position: relative; /* تمكين العناصر النسبية */
+}
+
+/* إضافة تأثير عند تحديد الزر */
+.radio-option input[type="radio"]:checked {
+    background-color: #f7c600; /* تغيير لون الخلفية عند التحديد */
+}
+
+/* تصميم زر الراديو عند التحديد */
+.radio-option input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 4px; /* تحريك النقطة للخلف */
+    left: 4px; /* تحريك النقطة للخلف */
+    width: 10px; /* عرض النقطة */
+    height: 10px; /* ارتفاع النقطة */
+    border-radius: 50%; /* جعلها دائرية */
+    background-color: #222; /* لون النقطة */
+}
+
+
+/* تنسيق قائمة الردود */
+.responses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* مسافة بين العناصر */
+    margin-top: 20px;
+}
+/* تصميم الـ response-item */
+.response-item {
+    background-color: #333; /* لون خلفية داكن */
+    padding: 15px;
+    border-radius: 8px; /* زوايا مستديرة */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* ظل خفيف */
+    transition: background-color 0.3s ease; /* تأثير على لون الخلفية عند التمرير */
+}
+
+.response-item:hover {
+    background-color: #444; /* تغيير لون الخلفية عند التمرير */
+}
+
+/* عرض تفاصيل الرد داخل الـ response-item */
+.response-summary {
+    display: flex;
+    justify-content: space-between; /* جعل الزر في الجهة اليمنى */
+    align-items: center;
+    cursor: pointer; /* مؤشر يد للإشارة إلى أنه يمكن التفاعل معه */
+}
+
+.response-summary p {
+    margin: 0; /* إزالة المسافات العلوية والسفلية */
+}
+
+/* تصميم زر إظهار التفاصيل */
+.btn-toggle-details {
+    background-color: #f7c600; /* لون الزر */
+    color: #222; /* لون النص */
+    border: none;
+    padding: 5px 10px; /* مسافة داخلية */
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold; /* جعل النص عريضاً */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* إضافة ظل للزر */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* تأثيرات التمرير */
+}
+
+.btn-toggle-details:hover {
+    background-color: #e0ac00; /* تغيير لون الزر عند التمرير */
+    transform: scale(1.05); /* تكبير الزر قليلاً */
+}.response-details {
+    display: none; /* إخفاء التفاصيل بشكل افتراضي */
+    margin-top: 10px; /* مسافة أعلى للتفاصيل */
+    padding: 15px; /* زيادة الحشوة */
+    background-color: #333; /* خلفية داكنة للتفاصيل */
+    border-radius: 8px; /* زوايا دائرية للتفاصيل */
+    transition: all 0.3s ease; /* تأثير سلس عند العرض والإخفاء */
+    opacity: 0; /* إخفاء العنصر */
+    transform: translateY(-10px); /* تحريك العنصر لأعلى قليلاً */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* إضافة ظل قوي للتفاصيل */
+}
+
+.response-details.visible {
+    display: block; /* جعل العنصر مرئي */
+    opacity: 1; /* جعل العنصر مرئي */
+    transform: translateY(0); /* إعادة العنصر إلى موضعه الطبيعي */
+}
+
+.response-details p {
+    font-size: 15px; /* تغيير حجم الخط */
+    margin: 12px 0; /* إضافة مسافات بين الفقرات */
+    line-height: 1.8; /* زيادة التباعد بين الأسطر */
+    color: #eaeaea; /* لون نص أخف */
+}
+
+.response-details p strong {
+    display: block; /* جعل النص في سطر جديد */
+    margin-bottom: 8px; /* مسافة أسفل النص العريض */
+    font-weight: bold; /* جعل النص عريضاً */
+    color: #ffcc00; /* لون النص العريض */
+    font-size: 16px; /* تكبير حجم الخط للعناوين */
+}
+
+.response-details button {
+    background-color: #ff9800; /* لون الزر */
+    color: white; /* لون النص الأبيض */
+    padding: 12px 25px; /* زيادة المسافة الداخلية */
+    border: none;
+    border-radius: 8px; /* زوايا دائرية أكبر */
+    font-weight: bold; /* نص عريض */
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25); /* إضافة ظل للزر */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* تأثيرات عند التمرير */
+}
+
+.response-details button:hover {
+    background-color: #e08900; /* تغيير لون الزر عند التمرير */
+    transform: scale(1.08); /* تكبير الزر أكثر قليلاً */
+}
+
+.response-details button {
+    float: right;
+    margin-top: 10px; /* مسافة أعلى للزر */
+    margin-top: 35px;
+}
+
+form .btn-primary,
+form .btn-secondary,
+form .btn-danger {
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 12px;
+    margin-left: 5px; /* تباعد بين الأزرار */
+    margin-right: 5px; /* تباعد بين الأزرار */
+}
+
+/* تنسيق صندوق التعليمات */
+.instruction-box {
+    text-align: right; /* محاذاة النص لليمين */
+    margin-right: 20px; /* مسافة من اليمين للصندوق */
+    margin-top: 10px; /* مسافة من أعلى الصندوق */
+    color: #f7c600; /* لون النص */
+    font-size: 13px; /* حجم النص */
+}
+
+/* تخصيص الفقرات داخل الصندوق */
+.instruction-box p {
+    margin: 5px 0; /* تقليل المسافة بين الفقرات */
+}
+
+
+/* تخصيص شريط التمرير */
+::-webkit-scrollbar {
+    width: 12px; /* عرض شريط التمرير */
+}
+
+::-webkit-scrollbar-track {
+    background: #444; /* لون خلفية شريط التمرير */
+    border-radius: 10px; /* زوايا دائرية للخلفية */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* لون شريط التمرير */
+    border-radius: 10px; /* زوايا دائرية لشريط التمرير */
+    transition: background 0.3s; /* تأثير الانتقال عند التحويم */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* لون شريط التمرير عند التحويم */
+}

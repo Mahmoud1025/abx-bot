@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/index.css"> <!-- ربط بملف CSS الخاص بالصفحة الرئيسية -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- إضافة Font Awesome -->
+    <title>الصفحة الرئيسية</title>
+</head>
+<body>
+    <header class="main-header">
+        <nav>
+            <ul>
+                <li><a href="/">الصفحة الرئيسية</a></li>
+                
+                <% if (user) { %>
+                    <!-- إذا كان المستخدم مسجلاً -->
+                    <li><a href="/dashboard">لوحة التحكم</a></li>
+                <% } else { %>
+                    <!-- إذا لم يكن المستخدم مسجلاً -->
+                    <li><a href="/login" class="login-btn">تسجيل الدخول</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h1>مرحباً بك في بوت ابيكس لإدارة السيرفرات</h1>
+            
+            <!-- إضافة صورة البوت هنا -->
+            <div class="bot-image">
+                <img src="/image/bot.png" alt="صورة البوت">
+            </div>
+            
+            <p>قم بإدارة سيرفرك بسهولة مع خصائص الحظر، فك الحظر، والتحكم الكامل في إعدادات السيرفر</p>
+            
+            <% if (!user) { %>
+                <a href="/login" class="btn-primary">تسجيل الدخول عبر Discord</a>
+            <% } else { %>
+                <a href="/dashboard" class="btn-primary">الانتقال إلى لوحة التحكم</a>
+            <% } %>
+        </section>
+
+        <section class="features-section">
+            <h2>مميزات البوت</h2>
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fas fa-cogs"></i> <!-- أيقونة إدارة السيرفر -->
+                    <h3>إدارة البوت</h3>
+                    <p>تحكم كامل في إعدادات البوت  بكل سهولة وسلاسة</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-ban"></i> <!-- أيقونة الحظر وفك الحظر -->
+                    <h3>الحظر وفك الحظر</h3>
+                    <p>إدارة عمليات الحظر وفك الحظر بنقرة زر</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-sliders-h"></i> <!-- أيقونة الإعدادات المتقدمة -->
+                    <h3>إعدادات متقدمة</h3>
+                    <p>ضبط إعدادات البوت لتناسب احتياجاتك</p>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <p> All Right Copyright For MHM Team © 2024</p>
+    </footer>
+</body>
+</html>

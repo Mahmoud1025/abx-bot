@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/create-embed.css">
+    <title>إنشاء Embed جديد</title>
+</head>
+<body>
+    <header class="dashboard-header">
+        <nav>
+            <ul>
+                <li><a href="/">الصفحة الرئيسية</a></li>
+                <li><a href="/dashboard">لوحة التحكم</a></li>
+                <li class="profile-info">
+                    <div class="avatar-container" onclick="toggleProfileBox()">
+                        <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" alt="Profile Avatar" class="avatar">
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- صندوق المستخدم -->
+        <div id="profile-box" class="profile-box">
+            <span class="username"><%= user.username %></span>
+            <a href="/logout" class="btn-secondary">تسجيل الخروج</a>
+        </div>
+    </header>
+    <main>
+        <h1>إنشاء Embed جديد</h1>
+
+        <form id="embedForm" action="/server/<%= guild.id %>/create-embed" method="POST">
+            <label for="channel">اختر الروم</label>
+            <select name="channel" id="channel" required>
+                <% guildChannels.forEach(channel => { %>
+                    <option value="<%= channel.id %>"><%= channel.name %></option>
+                <% }) %>
+            </select>
+            <hr class="styled-hr">
+
+            <div class="row">
+                <div class="field">
+                    <input type="text" id="authorName" name="authorName" placeholder="اسم الكاتب" required>
+                </div>
+                <div class="field">
+                    <input type="text" id="authorIcon" name="authorIcon" placeholder="أيقونة الكاتب (URL)">
+                </div>
+                <div class="field">
+                    <input type="text" id="authorUrl" name="authorUrl" placeholder="رابط الكاتب">
+                </div>
+            </div>
+        
+            <div class="field">
+                <input type="text" id="title" name="title" placeholder="عنوان الامبيد" required>
+            </div>
+        
+            <div class="field">
+                <textarea id="description" name="description" placeholder="وصف الامبيد" required></textarea> 
+            </div>
+        
+            <div class="row">
+                <div class="field">
+                    <input type="text" id="footerText" name="footerText" placeholder="نص التذييل" required>
+                </div>
+                <div class="field">
+                    <input type="text" id="footerIcon" name="footerIcon" placeholder="رابط أيقونة التذييل (URL)" required>
+                </div>
+            </div>
+            <hr class="styled-hr">
+
+            <div class="field">
+                <div class="color-wrapper">
+                    <input type="color" id="color" name="color" value="#f7c600" required>
+                    <div class="color-palette">
+                        <div class="color-circle" style="background-color: red;" onclick="setColor('#ff0000')"></div>
+                        <div class="color-circle" style="background-color: green;" onclick="setColor('#00ff00')"></div>
+                        <div class="color-circle" style="background-color: blue;" onclick="setColor('#0000ff')"></div>
+                        <div class="color-circle" style="background-color: yellow;" onclick="setColor('#ffff00')"></div>
+                        <div class="color-circle" style="background-color: orange;" onclick="setColor('#ff7f00')"></div>
+                    </div>
+                </div>
+            </div>                      
+            <hr class="styled-hr">
+          
+            <div class="field">
+                <input type="text" id="image" name="image" placeholder="رابط الصورة الرئيسية" required>
+            </div>
+
+            <div class="field">
+                <input type="text" id="authorSideImage" name="authorSideImage" placeholder="رابط الصورة الجانبية" required>
+            </div>
+        
+            <button type="submit">Embed انشاء الـ</button> 
+        </form>
+
+        <!-- معاينة الـEmbed -->
+        <h2>Embed معاينة الـ</h2> 
+        <div id="embedPreview" class="embed-preview">
+            <div class="author">
+                <img id="previewAuthorIcon" src="" alt="" style="display: none;">
+                <a id="previewAuthorName" href="#" target="_blank"></a>
+            </div>
+            <h3 id="previewTitle">عنوان المعاينة</h3>
+            <p id="previewDescription">تفاصيل المعاينة</p>
+            <img id="previewImage" src="" alt="" style="max-width: 100%; display: none;">
+            <div class="footer">
+                <img id="previewFooterIcon" src="" alt="" style="display: none;">
+                <span id="previewFooterText"></span>
+            </div>
+        </div>
+        <a href="/dashboard">العودة إلى لوحة التحكم</a>
+
+    </main>
+
+    <script>
+        const authorNameInput = document.getElementById('authorName');
+        const authorIconInput = document.getElementById('authorIcon');
+        const authorUrlInput = document.getElementById('authorUrl');
+        const titleInput = document.getElementById('title');
+        const descriptionInput = document.getElementById('description');
+        const colorInput = document.getElementById('color');
+        const imageInput = document.getElementById('image');
+        const authorSideImageInput = document.getElementById('authorSideImage');
+        const footerTextInput = document.getElementById('footerText');
+        const footerIconInput = document.getElementById('footerIcon');
+        const previewAuthorName = document.getElementById('previewAuthorName');
+        const previewAuthorIcon = document.getElementById('previewAuthorIcon');
+        const previewTitle = document.getElementById('previewTitle');
+        const previewDescription = document.getElementById('previewDescription');
+        const previewImage = document.getElementById('previewImage');
+        const previewFooterText = document.getElementById('previewFooterText');
+        const previewFooterIcon = document.getElementById('previewFooterIcon');
+        const embedPreview = document.getElementById('embedPreview');
+        colorInput.addEventListener('input', () => {
+            embedPreview.style.borderColor = colorInput.value;
+        });
+
+        function setColor(color) {
+        document.getElementById('color').value = color; // تغيير قيمة حقل اللون
+        document.getElementById('embedPreview').style.borderColor = color; // تحديث لون المعاينة
+    }
+
+        // تحديث المعاينة عند تغيير المدخلات
+        authorNameInput.addEventListener('input', () => {
+            previewAuthorName.textContent = authorNameInput.value;
+            previewAuthorName.href = authorUrlInput.value;
+        });
+        authorIconInput.addEventListener('input', () => {
+            previewAuthorIcon.src = authorIconInput.value;
+            previewAuthorIcon.style.display = authorIconInput.value ? 'inline-block' : 'none';
+        });
+        titleInput.addEventListener('input', () => previewTitle.textContent = titleInput.value);
+        descriptionInput.addEventListener('input', () => previewDescription.textContent = descriptionInput.value);
+        colorInput.addEventListener('input', () => embedPreview.style.borderColor = colorInput.value);
+        imageInput.addEventListener('input', () => {
+            previewImage.src = imageInput.value;
+            previewImage.style.display = imageInput.value ? 'block' : 'none';
+        });
+        footerTextInput.addEventListener('input', () => previewFooterText.textContent = footerTextInput.value);
+        footerIconInput.addEventListener('input', () => {
+            previewFooterIcon.src = footerIconInput.value;
+            previewFooterIcon.style.display = footerIconInput.value ? 'inline-block' : 'none';
+        });
+        function toggleProfileBox() {
+            const profileBox = document.getElementById('profile-box');
+            if (profileBox.style.display === 'block') {
+                profileBox.style.display = 'none';
+            } else {
+                profileBox.style.display = 'block';
+            }
+        }
+
+        // إغلاق الصندوق عند النقر خارج الأفتار
+        document.addEventListener('click', function(event) {
+            const profileBox = document.getElementById('profile-box');
+            const avatarContainer = document.querySelector('.avatar-container');
+
+            if (!avatarContainer.contains(event.target) && !profileBox.contains(event.target)) {
+                profileBox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

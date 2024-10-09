@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+
+html, body {
+    font-family: 'Poppins', sans-serif; /* استخدام خط Poppins */
+    background-color: #222;
+    color: #fff;
+    margin: 0;
+    display: flex; /* استخدم flexbox */
+    flex-direction: column; /* ترتيب العناصر عمودياً */
+    padding: 0;
+    height: 100%; /* اجعل الـ body يأخذ كامل ارتفاع الشاشة */
+}
+
+a {
+    color: #f7c600;
+    text-decoration: none;
+}
+
+h1 {
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 25px;
+    color: #f7c600;
+    text-align: center; /* جعل العنوان في المنتصف */
+}
+/* تحسين تصميم الأزرار في الهيدر */
+header {
+    background-color: #333;
+    padding: 31px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* جعل الأزرار على الجانبين */
+    align-items: center;
+}
+
+nav ul {
+
+    list-style-type: none;
+    align-items: center;
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 15px;
+    padding: 0;
+    display: flex;
+    margin: 0;
+    width: 100%; /* اجعل الـ ul يأخذ عرض الصفحة بالكامل */
+}
+
+nav ul li {
+    margin-right: 15px; /* مسافة بين الأزرار */
+}
+
+nav ul li a {
+    color: #f7c600;
+    padding: 10px 20px;
+    background-color: #444;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* تأثير التمرير */
+}
+
+nav ul li a:hover {
+    background-color: #f7c600; /* تغيير اللون عند التمرير */
+    color: #222; /* لون النص عند التمرير */
+    transform: scale(1.05); /* تكبير الزر قليلاً */
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* دفع عنصر الـ profile-info إلى اليمين */
+}
+
+.avatar-container {
+    position: relative;
+    display: flex; /* جعل الأفاتار واسم المستخدم في صف واحد */
+    align-items: center; /* محاذاة العمودين في المنتصف */
+}
+
+.avatar-container:hover .username {
+    display: block; /* إظهار اسم المستخدم عند التمرير */
+}
+
+.avatar-container .username {
+    display: none; /* إخفاء اسم المستخدم بشكل افتراضي */
+    position: absolute;
+    top: 100%; /* وضع الاسم تحت الصورة */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #444;
+    color: #f7c600;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap; /* منع انكسار النص */
+}
+
+.avatar-container img.avatar {
+    width: 60px; /* زيادة حجم الصورة */
+    height: 60px;
+    border-radius: 50%;
+    margin-left: 15px; /* المسافة بين الصورة واسم المستخدم */
+}
+
+main {
+    flex: 1; /* اجعل الـ main يأخذ المساحة المتبقية من الشاشة */
+    padding: 20px;
+    max-width: 1200px; /* الحد الأقصى لعرض المحتوى */
+    margin: 0 auto; /* جعل المحتوى في المنتصف */
+    text-align: center; /* جعل النص في المنتصف */
+}
+
+.btn-primary {
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 16px; /* زيادة حجم الخط */
+    background-color: #f7c600; /* لون الخلفية */
+    color: #222; /* لون النص */
+    padding: 12px 24px; /* مسافة داخلية أكبر */
+    border: none; /* إزالة الحد */
+    border-radius: 30px; /* حواف دائرية أكبر */
+    cursor: pointer; /* تغيير المؤشر عند التمرير */
+    margin: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* إضافة ظل */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* إضافة تأثير على الأزرار */
+}
+
+.btn-primary:hover {
+    background-color: #e0ac00; /* لون الخلفية عند التمرير */
+    transform: translateY(-2px); /* رفع الزر قليلاً عند التمرير */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* زيادة الظل عند التمرير */
+}
+
+/* يمكنك إضافة زر ثانوي بنفس الأسلوب مع تغييرات بسيطة */
+.btn-secondary {
+    background-color: #444; /* لون خلفية مختلف للزر الثانوي */
+    color: #f7c600; /* لون النص مختلف */
+}
+
+.btn-secondary:hover {
+    background-color: #555; /* لون خلفية مختلف عند التمرير */
+}
+
+footer {
+    background-color: #333;
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    padding: 2px;
+    text-align: center;
+    color: #f7c600;
+}
+
+button {
+    background-color: #f7c600; /* لون الزر */
+    color: #222; /* لون النص */
+    padding: 10px 20px; /* مسافة داخلية */
+    border: none; /* إزالة الحد */
+    border-radius: 5px; /* إضافة حواف دائرية */
+    cursor: pointer; /* تغيير المؤشر عند التمرير */
+    margin-top: 15px; /* مسافة فوق الزر */
+}
+
+button:hover {
+    background-color: #e6b600; /* لون الزر عند التمرير */
+}
+
+/* قسم الهيرو */
+.hero-section {
+    padding: 60px 20px;
+    background: linear-gradient(to right, #333, #222);
+    color: #f7c600;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 3em;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+/* تأثير الدخول الناعم */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* قسم المميزات */
+.features-section {
+    padding: 40px;
+    background-color: #222;
+    text-align: center;
+}
+
+.features-section h2 {
+    color: #f7c600;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.feature-item {
+    background-color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: scale(1.05);
+    background-color: #444;
+}
+
+.feature-item img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.feature-item h3 {
+    color: #f7c600;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    color: #fff;
+    font-size: 1em;
+}
+/* تنسيق صورة البوت */
+.bot-image {
+    margin: 20px 0; /* مسافة فوق وتحت الصورة */
+    text-align: center;
+}
+
+.bot-image img {
+    max-width: 200px; /* تحديد عرض الصورة */
+    border-radius: 50%; /* جعل الصورة دائرية */
+    transition: transform 0.3s ease; /* إضافة تأثير الانتقال */
+}
+
+.bot-image img:hover {
+    transform: scale(1.1); /* تكبير الصورة عند التمرير */
+}
+
+/* تخصيص شريط التمرير */
+::-webkit-scrollbar {
+    width: 12px; /* عرض شريط التمرير */
+}
+
+::-webkit-scrollbar-track {
+    background: #444; /* لون خلفية شريط التمرير */
+    border-radius: 10px; /* زوايا دائرية للخلفية */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* لون شريط التمرير */
+    border-radius: 10px; /* زوايا دائرية لشريط التمرير */
+    transition: background 0.3s; /* تأثير الانتقال عند التحويم */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* لون شريط التمرير عند التحويم */
+}

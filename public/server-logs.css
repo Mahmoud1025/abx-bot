@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+
+body {
+    font-family: 'Poppins', sans-serif; /* استخدام خط Poppins */
+    background-color: #222;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+
+a {
+    color: #f7c600;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 15px;
+    color: #f7c600;
+    text-align: center; /* جعل العنوان في المنتصف */
+}
+
+/* تحسين تصميم الأزرار في الهيدر */
+header {
+    
+    background-color: #333;
+    padding: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* جعل الأزرار على الجانبين */
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    align-items: center;
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 15px;
+    padding: 0;
+    display: flex;
+    margin: 0;
+    width: 100%; /* اجعل الـ ul يأخذ عرض الصفحة بالكامل */
+}
+
+nav ul li {
+    margin-right: 15px; /* مسافة بين الأزرار */
+}
+
+nav ul li a {
+    color: #f7c600;
+    padding: 10px 20px;
+    background-color: #444;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* تأثير التمرير */
+}
+
+nav ul li a:hover {
+    background-color: #f7c600; /* تغيير اللون عند التمرير */
+    color: #222; /* لون النص عند التمرير */
+    transform: scale(1.05); /* تكبير الزر قليلاً */
+}
+.profile-info {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* دفع عنصر الـ profile-info إلى اليمين */
+}
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer; /* لجعل صورة الأفتار قابلة للنقر */
+}
+
+.profile-box {
+    display: none; /* إخفاء الصندوق بشكل افتراضي */
+    position: absolute;
+    top: 70px; /* جعل الصندوق يظهر أسفل الأفتار */
+    right: 0;
+    background-color: #444;
+    color: #f7c600;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* لجعل الصندوق يظهر فوق العناصر الأخرى */
+    text-align: center; /* محاذاة المحتوى في المنتصف */
+}
+
+.profile-box .username {
+    display: block; /* جعل الاسم يظهر كعنصر كتلة */
+    font-size: 18px;
+    margin-bottom: 10px; /* إضافة مسافة أسفل الاسم */
+}
+
+.profile-box a {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #f7c600;
+    color: #444;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* إضافة تأثير على الأزرار */
+}
+
+.profile-box a:hover {
+    background-color: #e0ac00; /* لون عند مرور الفأرة */
+    transform: scale(1.05); /* تكبير الأزرار قليلاً عند التمرير */
+}
+
+
+
+.avatar-container img.avatar {
+    width: 60px; /* زيادة حجم الصورة */
+    height: 60px;
+    border-radius: 50%;
+    margin-left: 15px; /* المسافة بين الصورة واسم المستخدم */
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px; /* الحد الأقصى لعرض المحتوى */
+    margin: 0 auto; /* جعل المحتوى في المنتصف */
+    text-align: center; /* جعل النص في المنتصف */
+}
+
+.btn-primary, .btn-secondary {
+    background-color: #f7c600;
+    color: #222;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* إضافة تأثير على الأزرار */
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    background-color: #e0ac00; /* لون عند مرور الفأرة */
+    transform: scale(1.05); /* تكبير الأزرار قليلاً عند التمرير */
+}
+
+
+form {
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 13px;
+    background-color: #444; /* خلفية النموذج */
+    padding: 20px; /* إضافة مسافة داخلية */
+    border-radius: 8px; /* إضافة حواف دائرية */
+    margin-bottom: 20px; /* مسافة بين النموذج والعناصر الأخرى */
+}
+
+label {
+    display: block; /* عرض التسمية في سطر جديد */
+    margin-top: 10px; /* مسافة بين التسمية والحقول */
+    color: #f7c600; /* لون التسمية */
+    margin-bottom: 15px;
+}
+
+select {
+    width: 100%; /* عرض كامل */
+    padding: 8px; /* إضافة مسافة داخلية */
+    border-radius: 5px; /* إضافة حواف دائرية */
+    background-color: #555; /* لون الخلفية */
+    color: #fff; /* لون النص */
+    border: 1px solid #444; /* حد حول الحقل */
+    appearance: none; /* إزالة السهم الافتراضي */
+    text-align: center; /* توسيط النص */
+    transition: background-color 0.3s, border-color 0.3s; /* تأثير الانتقال */
+}
+
+/* تأثير عند التمرير */
+select:hover {
+    background-color: #666; /* تغيير لون الخلفية عند التمرير */
+}
+
+/* تأثير عند التركيز */
+select:focus {
+    outline: none; /* إزالة الإطار الافتراضي عند التركيز */
+    border-color: #fff; /* تغيير لون الحد عند التركيز */
+    background-color: #444; /* تغيير لون الخلفية عند التركيز */
+}
+
+/* لإضافة السهم المخصص (اختياري) */
+select::after {
+    content: ""; /* محتوى فارغ */
+    display: inline-block; /* عرض ككتلة داخلية */
+    width: 0; /* عرض صفر */
+    height: 0; /* ارتفاع صفر */
+    border-left: 5px solid transparent; /* حد شفاف على اليسار */
+    border-right: 5px solid transparent; /* حد شفاف على اليمين */
+    position: absolute; /* وضع مطلق */
+    top: 50%; /* تحديد الموقع العلوي */
+    right: 10px; /* مسافة من اليمين */
+    transform: translateY(-50%); /* مركز العمود */
+}
+
+
+button {
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 13px;
+    background-color: #f7c600; /* لون الزر */
+    color: #222; /* لون النص */
+    padding: 10px 20px; /* مسافة داخلية */
+    border: none; /* إزالة الحد */
+    border-radius: 5px; /* إضافة حواف دائرية */
+    cursor: pointer; /* تغيير المؤشر عند التمرير */
+    margin-top: 15px; /* مسافة فوق الزر */
+}
+
+button:hover {
+    background-color: #e6b600; /* لون الزر عند التمرير */
+}
+
+.log-settings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* المسافة بين الصناديق */
+    justify-content: center; /* محاذاة الصناديق إلى الوسط */
+}
+
+.log-box {
+    border: 1px solid rgb(230, 182, 0); /* لون الحدود */
+    padding: 20px; /* مساحة داخلية أكبر */
+    border-radius: 10px; /* زوايا دائرية أكبر */
+    flex: 1 1 200px; /* العرض */
+    min-width: 200px; /* الحد الأدنى للعرض */
+    background-color: #222; /* لون خلفية الصندوق */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل للصندوق */
+    transition: transform 0.3s, box-shadow 0.3s; /* تأثير عند التحويم */
+}
+.guild-info {
+    font-size: 12px; /* حجم الخط الصغير */
+    color: #666; /* لون النص */
+    display: block; /* جعلها تظهر في سطر جديد */
+}
+
+.log-box:hover {
+    transform: translateY(-5px); /* رفع الصندوق عند التحويم */
+    box-shadow: 0 8px 16px rgb(230, 182, 0); /* ظل أكبر عند التحويم */
+}
+
+/* تصميم الإشعار */
+#notification {
+    display: none; /* إخفاء الإشعار افتراضيًا */
+    position: fixed;
+    top: 20px;
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 13px;
+    right: 20px;
+    background-color: #4caf50; /* لون الإشعار */
+    color: white; /* لون النص */
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeIn 0.5s, fadeOut 0.5s 3s; /* تأثيرات الظهور والاختفاء */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+
+/* تخصيص شريط التمرير */
+::-webkit-scrollbar {
+    width: 12px; /* عرض شريط التمرير */
+}
+
+::-webkit-scrollbar-track {
+    background: #444; /* لون خلفية شريط التمرير */
+    border-radius: 10px; /* زوايا دائرية للخلفية */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* لون شريط التمرير */
+    border-radius: 10px; /* زوايا دائرية لشريط التمرير */
+    transition: background 0.3s; /* تأثير الانتقال عند التحويم */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* لون شريط التمرير عند التحويم */
+}

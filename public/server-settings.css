@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+
+body {
+    font-family: 'Poppins', sans-serif; /* استخدام خط Poppins */
+    background-color: #222;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+
+a {
+    color: #f7c600;
+    text-decoration: none;
+}
+
+h1 {
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 23px;
+    color: #f7c600;
+    text-align: center;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    position: fixed;
+    top: 80px;
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 20px;
+    right: 0;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.content {
+    margin-right: 280px;
+    padding: 20px;
+}
+.server-info {
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 20px;
+    background-color: #444;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s ease-in-out; /* تأثير دخول */
+    margin-top: 20px; /* إضافة مسافة من الأعلى */
+    transition: transform 0.3s ease; /* تأثير التمرير */
+}
+
+/* تأثير عند تمرير الماوس على معلومات السيرفر */
+.server-info:hover {
+    transform: translateY(-5px); /* رفع الكارت قليلاً */
+    box-shadow: 0 8px 16px rgba(247, 198, 0, 0.1); /* إضافة ظل أكبر عند التمرير */
+}
+
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #555; /* فاصل */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* تأثير عند المرور */
+}
+
+.info-item:last-child {
+    border-bottom: none; /* إزالة الفاصل الأخير */
+}
+
+/* تأثير عند المرور على عناصر المعلومات */
+.info-item:hover {
+    background-color: rgba(247, 198, 0, 0.1); /* تغيير اللون عند المرور */
+    transform: translateY(-3px); /* رفع العنصر قليلاً */
+}
+
+/* حركة العناصر عند ظهورها */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* البداية غير مرئي */
+        transform: translateY(20px); /* التحريك من الأسفل */
+    }
+    to {
+        opacity: 1; /* النهاية مرئية */
+        transform: translateY(0); /* العودة للمكان الأصلي */
+    }
+}
+.btn-primary, .btn-secondary {
+    background-color: #222;
+    color: #f7c600;
+    padding: 12px 75px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 27px;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.4s ease, background-color 0.4s ease, transform 0.4s ease; /* إضافة تأثير التحريك */
+}
+
+/* تأثير التحويم المحسن */
+.btn-primary:hover, .btn-secondary:hover {
+    color: #222;
+    background-color: #f7c600;
+    transform: scale(1.1) translateY(-5px); /* تكبير الزر مع التحريك للأعلى */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* تأثير الجزيئات المتحركة */
+.btn-primary::after, .btn-secondary::after {
+    content: '';
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2); /* لون خفيف */
+    top: 50%;
+    left: 50%;
+    border-radius: 50%; /* شكل دائري */
+    transform: translate(-50%, -50%) scale(0); /* بداية الحجم 0 */
+    transition: transform 0.4s ease; /* تأثير التحريك */
+}
+
+.btn-primary:hover::after, .btn-secondary:hover::after {
+    transform: translate(-50%, -50%) scale(1); /* تكبير الحجم عند التحويم */
+    z-index: 0; /* وضعها خلف الزر */
+}
+
+/* تحسين تصميم الأزرار في الهيدر */
+header {
+    background-color: #333;
+    padding: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* جعل الأزرار على الجانبين */
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo للعناوين */
+    font-size: 15px;
+    align-items: center;
+    padding: 0;
+    display: flex;
+    margin: 0;
+    width: 100%; /* اجعل الـ ul يأخذ عرض الصفحة بالكامل */
+}
+
+nav ul li {
+    margin-right: 15px; /* مسافة بين الأزرار */
+}
+
+nav ul li a {
+    color: #f7c600;
+    padding: 10px 20px;
+    background-color: #444;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* تأثير التمرير */
+}
+
+nav ul li a:hover {
+    background-color: #f7c600; /* تغيير اللون عند التمرير */
+    color: #222; /* لون النص عند التمرير */
+    transform: scale(1.05); /* تكبير الزر قليلاً */
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* دفع عنصر الـ profile-info إلى اليمين */
+}
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer; /* لجعل صورة الأفتار قابلة للنقر */
+}
+
+.profile-box {
+    display: none; /* إخفاء الصندوق بشكل افتراضي */
+    position: absolute;
+    top: 70px; /* جعل الصندوق يظهر أسفل الأفتار */
+    right: 0;
+    background-color: #444;
+    color: #f7c600;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* لجعل الصندوق يظهر فوق العناصر الأخرى */
+    text-align: center; /* محاذاة المحتوى في المنتصف */
+}
+
+.profile-box .username {
+    display: block; /* جعل الاسم يظهر كعنصر كتلة */
+    font-size: 18px;
+    margin-bottom: 10px; /* إضافة مسافة أسفل الاسم */
+}
+
+.profile-box a {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #f7c600;
+    color: #444;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* إضافة تأثير على الأزرار */
+}
+
+.profile-box a:hover {
+    background-color: #e0ac00; /* لون عند مرور الفأرة */
+    transform: scale(1.05); /* تكبير الأزرار قليلاً عند التمرير */
+}
+
+.avatar-container img.avatar {
+    width: 60px; /* زيادة حجم الصورة */
+    height: 60px;
+    border-radius: 50%;
+    margin-left: 15px; /* المسافة بين الصورة واسم المستخدم */
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px; /* الحد الأقصى لعرض المحتوى */
+    margin: 0 auto; /* جعل المحتوى في المنتصف */
+    text-align: center; /* جعل النص في المنتصف */
+}
+
+
+/* تخصيص شريط التمرير */
+::-webkit-scrollbar {
+    width: 12px; /* عرض شريط التمرير */
+}
+
+::-webkit-scrollbar-track {
+    background: #444; /* لون خلفية شريط التمرير */
+    border-radius: 10px; /* زوايا دائرية للخلفية */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* لون شريط التمرير */
+    border-radius: 10px; /* زوايا دائرية لشريط التمرير */
+    transition: background 0.3s; /* تأثير الانتقال عند التحويم */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* لون شريط التمرير عند التحويم */
+}
